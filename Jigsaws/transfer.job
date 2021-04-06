@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#SBATCH --job-name=transfer
+
+### how much time, this job takes < one minute, we just put 1 hour
+#SBATCH --time=01:00:00
+
+### how much memory, 4 GB is plenty for this
+#SBATCH --mem=8000
+
+### how many processes in this job
+#SBATCH --ntasks=1
+
+### change the 1 below to match the # of cores needed
+#SBATCH --cpus-per-task=1
+
+#SBATCH --gres=gpu:P100:1
+
+#SBATCH --account=ece4179
+#SBATCH --partition=short,comp
+#SBATCH --reservation=ece4179
+
+module load pytorch/1.5-cuda10
+python transfer.py
+
+exit 0
